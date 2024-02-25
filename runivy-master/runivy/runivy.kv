@@ -1,0 +1,102 @@
+#:kivy 1.12.1
+
+<RunivySkyscraper>:
+    speed: 2
+    size: 15, 80
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "atlas://data/runivy/skyscraper"
+
+
+<RunivyNuclearSilo>:
+    speed: 2
+    size: 45, 55
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "atlas://data/runivy/nuclear_silo"
+
+
+<RunivyPhoneTower>:
+    speed: 2
+    size: 10, 40
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "atlas://data/runivy/phone_tower"
+
+
+<RunivyCloud>:
+    size: 100, 50
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "atlas://data/runivy/cloud"
+
+
+<RunivyPlayer>:
+    size: 79, 99
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: self.source
+
+<RunivyGame>:
+    player: player
+    score: score
+    button: button
+
+    canvas.before:
+        Rectangle:
+            pos: 0, 0
+            size: root.width, 104
+            texture: root.ground
+            tex_coords: (root.scroll, 1, 1 + root.scroll, 1, 1 + root.scroll, 0, root.scroll, 0)
+        # Sky
+        Color:
+            rgb: (0, 0.5, 1)
+        Rectangle:
+            pos: 0, 104
+            size: root.width, (root.height - 104) / 4
+        Color:
+            rgb: (0.2, 0.65, 1)
+        Rectangle:
+            pos: 0, 104 + (root.height - 104) / 4
+            size: root.width, (root.height - 104) / 4
+        Color:
+            rgb: (0.4, 0.80, 1)
+        Rectangle:
+            pos: 0, 104 + (root.height - 104) / 4 * 2
+            size: root.width, (root.height - 104) / 4
+        Color:
+            rgb: (0.6, 0.95, 1)
+        Rectangle:
+            pos: 0, 104 + (root.height - 104) / 4 * 3
+            size: root.width, (root.height - 104) / 4
+        Color:
+            rgb: (1, 1, 1)
+
+    Label:
+        id: score
+        font_size: 70
+        text: "0"
+        center_x: root.center_x
+        top: root.top - 30
+
+    Button:
+        id: button
+        font_size: 50
+        text: "Go !"
+        center_x: root.center_x
+        center_y: root.center_y
+        on_press: root.reset()
+
+    RunivyPlayer:
+        id: player
+        pos: 40, 104
